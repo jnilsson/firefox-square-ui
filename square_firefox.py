@@ -2,9 +2,10 @@
 """Brings back square tabs, URL bar and menus in Firefox's new "Nova" design.
 
 Works on Windows, macOS and Linux and needs nothing but Python 3.
-Adds a block to chrome/userChrome.css in every Firefox profile it finds and
-enables userChrome.css loading via user.js. Your own rules in an existing
-userChrome.css are kept.
+Adds a block to chrome/userChrome.css (browser UI) and chrome/userContent.css
+(about: pages such as about:preferences) in every Firefox profile it finds,
+and enables loading them via user.js. Your own rules in existing files are
+kept.
 
 Usage:
   python3 square_firefox.py           apply (run again to update)
@@ -112,6 +113,33 @@ tooltip,
 }
 """
 
+# about: pages are web pages, so userChrome.css does not reach them. Their
+# cards, buttons and inputs are built from the same radius tokens, but
+# components re-declare them on their own host element, so set them on every
+# element rather than only on :root.
+CONTENT_CSS = """
+@-moz-document url-prefix("about:") {
+  :root,
+  * {
+    --page-nav-button-border-radius: 0 !important;
+    --page-nav-button-border-radius-focused: 0 !important;
+    --input-border-radius: 0 !important;
+    --input-search-border-radius: 0 !important;
+    --border-radius-xsmall: 0 !important;
+    --border-radius-small: 0 !important;
+    --border-radius-medium: 0 !important;
+    --border-radius-large: 0 !important;
+    --border-radius-xlarge: 0 !important;
+    --button-border-radius: 0 !important;
+    --popup-border-radius: 0 !important;
+    --panel-border-radius: 0 !important;
+    --panel-menuitem-border-radius: 0 !important;
+  }
+}
+"""
+
+FILES = {"userChrome.css": CSS, "userContent.css": CONTENT_CSS}
+
 
 def firefox_roots():
     home = Path.home()
@@ -175,21 +203,23 @@ def update_user_js(profile, enable):
 def apply(profile):
     chrome = profile / "chrome"
     chrome.mkdir(exist_ok=True)
-    css_file = chrome / "userChrome.css"
-    own = strip_block(read(css_file))
-    block = BEGIN + "\n" + CSS.strip() + "\n" + END + "\n"
-    css_file.write_text((own + "\n\n" if own else "") + block, encoding="utf-8")
+    for name, css in FILES.items():
+        css_file = chrome / name
+        own = strip_block(read(css_file))
+        block = BEGIN + "\n" + css.strip() + "\n" + END + "\n"
+        css_file.write_text((own + "\n\n" if own else "") + block, encoding="utf-8")
     update_user_js(profile, enable=True)
 
 
 def remove(profile):
-    css_file = profile / "chrome" / "userChrome.css"
-    if css_file.is_file():
-        own = strip_block(read(css_file))
-        if own:
-            css_file.write_text(own + "\n", encoding="utf-8")
-        else:
-            css_file.unlink()
+    for name in FILES:
+        css_file = profile / "chrome" / name
+        if css_file.is_file():
+            own = strip_block(read(css_file))
+            if own:
+                css_file.write_text(own + "\n", encoding="utf-8")
+            else:
+                css_file.unlink()
     update_user_js(profile, enable=False)
 
 

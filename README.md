@@ -23,6 +23,7 @@ A small Python script adds the needed `userChrome.css` rules to every Firefox pr
 - Autofill popup for email, addresses and logins, including "Manage addresses"
 - Tooltips and form validation hints
 - Most other Nova elements, via the design system's radius tokens (round avatars and dots stay round)
+- Built-in pages such as `about:preferences` and `about:addons`: cards, buttons, inputs, the search field and the sidebar
 
 ## Requirements
 
@@ -65,8 +66,8 @@ Then restart Firefox.
 
 For each profile listed in Firefox's `profiles.ini`, the script:
 
-1. Adds a marked block of CSS to `chrome/userChrome.css`. Any rules you already have in that file are kept.
-2. Adds `toolkit.legacyUserProfileCustomizations.stylesheets = true` to the profile's `user.js`, so Firefox loads `userChrome.css` at all.
+1. Adds a marked block of CSS to `chrome/userChrome.css` for the browser UI, and to `chrome/userContent.css` for built-in `about:` pages. Any rules you already have in those files are kept.
+2. Adds `toolkit.legacyUserProfileCustomizations.stylesheets = true` to the profile's `user.js`, so Firefox loads both files at all.
 
 Profile locations it looks in:
 
