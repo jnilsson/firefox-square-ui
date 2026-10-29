@@ -125,6 +125,11 @@ CONTENT_CSS = """
     --page-nav-button-border-radius-focused: 0 !important;
     --input-border-radius: 0 !important;
     --input-search-border-radius: 0 !important;
+    --urlbar-border-radius: 0 !important;
+    --urlbar-inner-border-radius: 0 !important;
+    --urlbarview-border-radius: 0 !important;
+    --toolbarbutton-border-radius: 0 !important;
+    --content-search-handoff-ui-border-radius: 0 !important;
     --border-radius-xsmall: 0 !important;
     --border-radius-small: 0 !important;
     --border-radius-medium: 0 !important;
