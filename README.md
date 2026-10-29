@@ -1,6 +1,6 @@
 # firefox-square-ui
 
-Brings back square tabs, a square URL bar and square menus in Firefox's new rounded "Nova" design.
+Brings back square tabs, a square URL bar and square menus in Firefox's new rounded "Nova" design. You can also pick a small corner radius instead of fully square.
 
 A small Python script adds the needed `userChrome.css` rules to every Firefox profile on your computer. It runs on Windows, macOS and Linux and needs no cloud sync or extra tools.
 
@@ -50,17 +50,30 @@ git clone https://github.com/jnilsson/firefox-square-ui.git
    ```
 
    On Windows use `python square_firefox.py`, or simply double-click the file.
-3. Start Firefox again.
+3. Pick an option from the menu:
 
-Run the script once on every computer where you want square tabs. Running it again is safe: it replaces its own block instead of adding a second one, so you can also use it to update the rules.
+   ```
+     1) Install / update
+     2) Remove
+     3) Quit
+   ```
 
-### Undo
+   For **Install / update** the script then asks for a corner radius in pixels. Press Enter for `0` (fully square), or enter a value up to `50` if you just want softer corners than Nova's, for example `4`.
+4. Start Firefox again.
+
+Run the script once on every computer where you want square tabs. Running it again is safe: it replaces its own block instead of adding a second one, so you can also use it to update the rules or change the radius.
+
+### Without the menu
+
+For scripts or automation you can skip the menu:
 
 ```bash
-python3 square_firefox.py --remove
+python3 square_firefox.py --install              # fully square
+python3 square_firefox.py --install --radius 4   # 4px corners
+python3 square_firefox.py --remove               # undo
 ```
 
-Then restart Firefox.
+Restart Firefox afterwards.
 
 ## How it works
 
