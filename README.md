@@ -76,3 +76,7 @@ Firefox 157+ has a hidden switch that turns off the whole Nova redesign: open `a
 - **Something is still round after an update:** Firefox may have renamed an element. Open the Browser Toolbox (`Ctrl+Shift+Alt+I`, or `Cmd+Opt+Shift+I` on macOS), pick the round element and add its ID or class to the `CSS` block at the top of the script. Then run the script again.
 - **Nothing changed at all:** make sure Firefox was fully closed while the script ran and restarted afterwards.
 - **"No Firefox profile found":** start Firefox once so it creates a profile, then run the script again.
+
+## License
+
+[CC0 1.0 Universal](LICENSE): dedicated to the public domain. Use, change and share it for any purpose, no attribution required.
