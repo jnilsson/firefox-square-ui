@@ -4,7 +4,13 @@ Brings back square tabs, a square URL bar and square menus in Firefox's new roun
 
 A small Python script adds the needed `userChrome.css` rules to every Firefox profile on your computer. It runs on Windows, macOS and Linux and needs no cloud sync or extra tools.
 
-**Tested with Firefox 159.0 on Windows.** The Nova design first shipped in Firefox 157. macOS and Linux use the same code paths but have not been tested yet.
+**Tested with Firefox 159.0 on Windows and macOS.** The Nova design first shipped in Firefox 157.
+
+| OS | Status |
+| --- | --- |
+| Windows | Tested, works |
+| macOS | Tested, works |
+| Linux | Script tested on Ubuntu 26.04 (profile detection incl. Snap and Flatpak, apply, update, remove); not yet checked with a real Firefox window |
 
 ## What gets squared
 
