@@ -20,6 +20,9 @@ A small Python script adds the needed `userChrome.css` rules to every Firefox pr
 - Hamburger menu and other panels
 - Bookmark folders and context menus
 - Buttons on the bookmarks toolbar
+- Autofill popup for email, addresses and logins, including "Manage addresses"
+- Tooltips and form validation hints
+- Most other Nova elements, via the design system's radius tokens (round avatars and dots stay round)
 
 ## Requirements
 

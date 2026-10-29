@@ -25,7 +25,18 @@ PREF_MARK = "// firefox-square-ui"
 PREF_LINE = 'user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true); ' + PREF_MARK
 
 CSS = """
+/* Nova design tokens most rounded elements are built from.
+   --border-radius-circle is left alone so avatars and dots stay round. */
 :root {
+  --border-radius-xsmall: 0 !important;
+  --border-radius-small: 0 !important;
+  --border-radius-medium: 0 !important;
+  --border-radius-large: 0 !important;
+  --border-radius-xlarge: 0 !important;
+  --popup-border-radius: 0 !important;
+  --panel-menuitem-border-radius: 0 !important;
+  --button-border-radius: 0 !important;
+  --tooltip-border-radius: 0 !important;
   --tab-border-radius: 0 !important;
   --toolbarbutton-border-radius: 0 !important;
   --urlbar-border-radius: 0 !important;
@@ -73,6 +84,30 @@ menuitem {
 
 /* Buttons on the bookmarks toolbar */
 #PersonalToolbar toolbarbutton {
+  border-radius: 0 !important;
+}
+
+/* Autofill popup for email, addresses and logins ("Manage addresses").
+   The popup sets its own radius, and its rows round themselves inside a
+   shadow root that only custom properties can reach. */
+#PopupAutoComplete {
+  --panel-border-radius: 0 !important;
+  --popup-border-radius: 0 !important;
+}
+
+#PopupAutoComplete autocomplete-row-item {
+  --row-item-border-radius: 0 !important;
+  --button-border-radius: 0 !important;
+  --border-radius-xsmall: 0 !important;
+  --border-radius-small: 0 !important;
+  --border-radius-medium: 0 !important;
+  --border-radius-large: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Tooltips and form validation hints */
+tooltip,
+#invalid-form-popup {
   border-radius: 0 !important;
 }
 """
